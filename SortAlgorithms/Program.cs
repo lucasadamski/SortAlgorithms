@@ -15,6 +15,10 @@ namespace SortAlgorithms
             BubbleSort(array);
             PrintArray(array);
 
+            array = new int[] { 6, 8, 2, 4, 6, 9, 2, 4, 0, 1 };
+            ShakerSort(array);
+            PrintArray(array);
+
         }
         static void InnerSort(int[] tab)
         {
@@ -47,6 +51,37 @@ namespace SortAlgorithms
             }
         }
 
+        static void ShakerSort(int[] array)
+        {
+            int size = array.Length;
+            int left = 1;
+            int right = size - 1;
+            int k = size - 1; // ?
+            do
+            {
+                for (int j = right; j >= left; j--)
+                {
+                    if (array[j - 1] > array[j])
+                    {
+                        Swap(ref array[j - 1], ref array[j]);
+                        k = j; // ?
+                    }
+                }
+                left = k + 1; // ?
+                for (int j = left; j <= right; j++)
+                {
+                    if (array[j - 1] > array[j])
+                    {
+                        Swap(ref array[j - 1], ref array[j]);
+                        k = j; // ?
+                    }
+                }
+                right = k - 1; // ?
+
+            } while (left <= right);
+
+        }
+
         static void PrintArray(int[] array)
         {
             for (int i = 0; i < array.Length; i++)
@@ -54,6 +89,13 @@ namespace SortAlgorithms
                 Console.Write(array[i]);
             }
             Console.Write("\n");
+        }
+
+        static void Swap(ref int a, ref int b)
+        {
+            int temp = a;
+            a = b;
+            b = temp;
         }
     }
 }
